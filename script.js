@@ -1,9 +1,11 @@
 const image = document.querySelector("#image");
 const counter = document.querySelector(".counter");
 const perSecond = document.querySelector(".perSecond");
-const buttons = Array.from(document.querySelectorAll(".button"));
+const btn1 = document.querySelector(".button1");
+const btn2 = document.querySelector(".button2");
+const btn3 = document.querySelector(".button3");
 
-let number = 0;
+let number = 1;
 let start = true;
 let purchases = 0;
 let cps = 0
