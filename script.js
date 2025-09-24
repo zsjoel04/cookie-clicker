@@ -1,9 +1,7 @@
 const image = document.querySelector("#image");
 const counter = document.querySelector(".counter");
 const perSecond = document.querySelector(".perSecond");
-const btn1 = document.querySelector(".button1");
-const btn2 = document.querySelector(".button2");
-const btn3 = document.querySelector(".button3");
+const buttons = Array.from(document.querySelectorAll(".button"))
 
 let number = 1;
 let start = true;
@@ -13,30 +11,23 @@ let intervalId = null;
 
 image.addEventListener("mousedown", eventHandlerClick);
 image.addEventListener("click", eventHandlerMouseup);
-btn1.addEventListener("click", eventHandlerButton);
-btn2.addEventListener("click", eventHandlerButton);
-btn3.addEventListener("click", eventHandlerButton);
-
+buttons.forEach((btn) => btn.addEventListener("click", eventHandlerButton));
 
 function eventHandlerClick(){
     if(start){
         start = false        
-        counter.innerText = number
     }else{
         number += 1;
-        counter.innerText = number
     }
+    updateCounter();
     this.classList.toggle("imageTransform")
 }
 function eventHandlerMouseup(){
     this.classList.toggle("imageTransform")
 }
 
-
 function eventHandlerButton(){
-    let space = this.innerText.indexOf(" ");
-    let price = this.innerText.slice(space + 1);
-    price = Number(price)
+    let price = Number(this.dataset.price)
     if(price <= number){
         number -= price;
         counter.innerText = number;
@@ -48,20 +39,25 @@ function eventHandlerButton(){
         else if(price == 5000){
         cps += 100 ;        
         }
-        perSecond.innerText = `${cps}/S`;
+        updatePerSecond();
         timer(1, 1000/cps);
     }
 }
 
 
-function timer(secu, millisecs){
+function timer(secund, millisecs){
     if(intervalId) {
         clearInterval(intervalId);
     }
     intervalId = setInterval(function(){    
-        number += secu;
-        counter.innerText = number;
+        number += secund;
+        updateCounter();
         }, millisecs);
     }
 
-
+function updateCounter(){
+  counter.innerText = number;
+}
+function updatePerSecond(){
+  perSecond.innerText = `${cps}/S`;
+}
