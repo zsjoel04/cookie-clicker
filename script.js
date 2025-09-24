@@ -31,7 +31,7 @@ function eventHandlerButton(){
     if(price <= number){
         number -= price;
         counter.innerText = number;
-        if(price == 10){
+        if(price == 50){
         cps += 1;
         }else if(price == 500){
         cps += 10 ;        
@@ -41,7 +41,10 @@ function eventHandlerButton(){
         }
         updatePerSecond();
         timer(1, 1000/cps);
-    }
+    }else{
+      alert("You can't affort this")
+    }    
+    
 }
 
 
